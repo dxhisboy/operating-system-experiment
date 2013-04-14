@@ -10,6 +10,13 @@
 
 int get_ipc_id(char *prof, key_t key);
 char *set_shm(key_t shm_key, int shm_num, int shm_flag);
-int set_msq(key_t sem_key, int sem_Val, int sem_flag);
-int set_sem(key_t sem_key, int sem_Val, int sem_flag);
+int set_sem(key_t sem_key, int sem_val, int sem_flag);
 int opsem(int sem_id, int val);
+typedef union semuns{
+	int val;
+}sem_uns;
+key_t TGP_key[3] = {101, 102, 103};
+key_t buf_key = 104;
+key_t mut_key = 105;
+char *buf;
+
