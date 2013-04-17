@@ -3,14 +3,14 @@ void produce(int id){
 	printf("Forked producer, id = %d, pid = %d\n", id, getpid());
 	srand(time(NULL) * id);
 	while (1){
-		sleep(1);
-		int leak = rand() % 3;
-		opsem(pTGP_sem_id[leak], -1);
+		sleep(3);
+		int l = rand() % 3;
+		opsem(pTGP_sem_id[l], -1);
 		opsem(buf_sem_id, -1);
-		printf("Producer %d produced %s and put it into buffer.\n", id, str[leak]);
-		buf_ptr[leak] = id;
+		printf("Producer %d produced %s and put it into buffer.\n", id, leak[l]);
+		buf_ptr[l] = id;
 		opsem(buf_sem_id, 1);
-		opsem(cTGP_sem_id[leak], 1);
+		opsem(cTGP_sem_id[l], 1);
 	}
 }
 int main(){

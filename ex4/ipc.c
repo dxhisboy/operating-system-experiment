@@ -1,7 +1,8 @@
 #include "ipc.h"
 key_t cTGP_sem_key[3] = {101, 102, 103};
 key_t pTGP_sem_key[3] = {201, 202, 203};
-char str[][10] = {"Tobacco", "Glue", "Paper"};
+char str[][10] = {"tobacco", "glue", "paper"};
+char leak[][20] = {"glue and paper", "tobacco and paper", "tobacco and glue"};
 int cTGP_sem_id[3];
 int pTGP_sem_id[3];
 key_t buf_key = 304;
@@ -36,7 +37,7 @@ int opsem(int sem_id, int val){
 	buf.sem_op = val;
 	buf.sem_num = 0;
 	buf.sem_flg = SEM_UNDO;
-	
+	//printf("%d %d %d\n", sem_id, semctl(sem_id, 0, GETVAL, res), val);
 	if (semop(sem_id, &buf, 1) < 0){
 		perror("Sem op failed");
 		exit(1);
@@ -59,6 +60,8 @@ int set_sem(key_t sem_key, int sem_val, int sem_flg){
 			exit(1);
 		}
 	}
+	sem_uns res;
+	printf("%d %d %d\n", sem_key, sem_id, semctl(sem_id, 0, GETVAL, res));
 	return sem_id;
 }
 char *set_shm(key_t shm_key, int shm_num, int shm_flg){

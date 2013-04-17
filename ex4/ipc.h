@@ -22,6 +22,7 @@ typedef union semuns{
 extern key_t cTGP_sem_key[3];
 extern key_t pTGP_sem_key[3];
 extern char str[][10];
+extern char leak[][20];
 extern int cTGP_sem_id[3];
 extern int pTGP_sem_id[3];
 extern key_t buf_key;
