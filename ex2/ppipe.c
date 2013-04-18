@@ -7,7 +7,7 @@ int funcx(int x){
 	return funcx(x - 1) * x;
 }
 int funcy(int y){
-	if (y < 2)
+	if (y < 3)
 		return 1;
 	return funcy(y - 1) + funcy(y - 2);
 }
@@ -30,7 +30,7 @@ int main(){
 			close(p01[0]);
 			close(p02[0]);
 			close(p10[1]);
-			close(p20[1]);
+			close(p20[1]);cd 
 			int x, y, fx, fy;
 			scanf("%d%d", &x, &y);
 			write(p01[1], &x, sizeof(int));
