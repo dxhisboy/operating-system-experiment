@@ -3,7 +3,7 @@ key_t s_account = 101, s_customer = 102;
 key_t q_sofa = 301, q_wait = 302;
 int s_account_id, s_customer_id;
 int q_sofa_id, q_wait_id;
-int msg_size = sizeof(msg_buf);
+int msg_size = 1;
 int get_ipc_id(char *prof, key_t key){
 	FILE *pf;
 	char line[BUFSZ], colum[BUFSZ];
@@ -25,11 +25,11 @@ int get_ipc_id(char *prof, key_t key){
 	}
 	return -1;
 }
-int opsem(int sem_id, int val){
+int opsem(int sem_id, int val, int flg = 0){
 	struct sembuf buf;
 	buf.sem_op = val;
 	buf.sem_num = 0;
-	buf.sem_flg = SEM_UNDO;
+	buf.sem_flg = SEM_UNDO | flg;
 	//printf("%d %d %d\n", sem_id, semctl(sem_id, 0, GETVAL, res), val);
 	if (semop(sem_id, &buf, 1) < 0){
 		perror("Sem op failed");
