@@ -3,9 +3,9 @@ int main(){
 	ipc_init();
 	int cnt = 0;
 	while (1){
-		msgid_ds msg_stat;
+		msqid_ds msg_stat;
 		msg_buf msg;
-		if (opsem(s_customer_id, -1, IPC_NOWAIT) < 0){
+		if (oopsem(s_customer_id, -1, IPC_NOWAIT) < 0){
 			printf("Barber shop full, deny customers\n");
 			opsem(s_customer_id, -1);
 		}
@@ -25,7 +25,7 @@ int main(){
 			msg.mtype = 1;
 			msg.mtext[0] = ++cnt;
 			msgsnd(q_wait_id, &msg, msg_size, 0);
-			printf("New customer %d sit to waitting room\n");
+			printf("New customer %d sit to waitting room\n", cnt);
 		}
 		sleep(rand() % 8 + 4);
 	}

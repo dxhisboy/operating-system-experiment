@@ -25,7 +25,10 @@ int get_ipc_id(char *prof, key_t key){
 	}
 	return -1;
 }
-int opsem(int sem_id, int val, int flg = 0){
+int opsem(int sem_id, int val){
+	return oopsem(sem_id, val, 0);
+}
+int oopsem(int sem_id, int val, int flg){
 	struct sembuf buf;
 	buf.sem_op = val;
 	buf.sem_num = 0;
@@ -72,7 +75,7 @@ char *set_shm(key_t shm_key, int shm_num, int shm_flg){
 	}
 	return shm_buf;
 }
-int set_msq(key_t msq_key, int msq_flag){
+int set_msq(key_t msq_key, int msq_flg){
 	int msg_id;
 	if ((msg_id = get_ipc_id("/proc/sysvipc/msg", msq_key)) < 0){
 		if ((msg_id = msgget(msq_key, msq_flg)) < 0){
