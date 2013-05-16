@@ -9,7 +9,7 @@ int main(){
 			printf("Barber shop full, deny customers\n");
 			opsem(s_customer_id, -1);
 		}
-		msgctl(q_sofa_id, IPC_STAT, &msg_stat);
+		printf("%d\n",msgctl(q_sofa_id, IPC_STAT, &msg_stat));
 		if (msg_stat.msg_qnum < 4){
 			if (msgrcv(q_wait_id, &msg, msg_size, 0, IPC_NOWAIT) >= 0){
 				msgsnd(q_sofa_id, &msg, msg_size, 0);
@@ -27,7 +27,7 @@ int main(){
 			msgsnd(q_wait_id, &msg, msg_size, 0);
 			printf("New customer %d sit to waitting room\n", cnt);
 		}
-		sleep(rand() % 8 + 4);
+		sleep(rand()%2);
 	}
 	return 0;
 }

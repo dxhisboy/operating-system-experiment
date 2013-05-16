@@ -33,10 +33,9 @@ int oopsem(int sem_id, int val, int flg){
 	buf.sem_op = val;
 	buf.sem_num = 0;
 	buf.sem_flg = SEM_UNDO | flg;
-	//printf("%d %d %d\n", sem_id, semctl(sem_id, 0, GETVAL, res), val);
 	if (semop(sem_id, &buf, 1) < 0){
-		perror("Sem op failed");
-		exit(1);
+	//	perror("Sem op failed");
+		return -1;
 	}
 	return 0;
 }
