@@ -1,5 +1,5 @@
 #include "ipc.h"
-int get_ipc_id(char *prof, key_t key){
+int get_ipc_id(const char *prof, key_t key){
 	FILE *pf;
 	char line[BUFSZ], colum[BUFSZ];
 	int i,j;
