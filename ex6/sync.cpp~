@@ -1,6 +1,6 @@
 #include "sync.h"
 semaphore::semaphore(int key, int val){
-	sem_id = set_sem(key, val);
+	sem_id = set_sem(key, val, 0);
 }
 void semaphore::operate(int delta){
 	opsem(sem_id, delta);
@@ -26,14 +26,14 @@ void oneway_condition::wait(lock *l, int direction){
 void oneway_condition::signal(int direction){
 	sem[direction ^ 1]->operate(1);
 }
-void oneway::oneway(int max){
+oneway::oneway(int max){
 	maxCars = max;
 	rate = 2;
 	l = new lock(501);
-	cond = new condition(new semaphore(502, 0), new semaphore(503, 0));
-	char *p = set_shm(504, 8, 0);
+	cond = new oneway_condition(new semaphore(502, 0), new semaphore(503, 0));
+	int *p = (int*)set_shm(504, 8, 0);
 	numCars = p;
-	currentDirection = p + 4;
+	currentDirection = p + 1;
 	(*numCars) = 0;
 	(*currentDirection) = 0;
 }
@@ -58,5 +58,12 @@ void oneway::quit(int direction){
 		cond->signal(direction);
 	l->release();
 }
-int main(){
+int main(int argc, char** argv){
+	oneway *way = new oneway(atoi(argv[1]));
+	while (1){
+		int a = rand()%2;
+		*way->arrive(a);
+		*way->cross(a);
+		*way->quit(a);
+	}
 }

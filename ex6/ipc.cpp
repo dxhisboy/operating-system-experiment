@@ -20,9 +20,7 @@ int get_ipc_id(char *prof, key_t key){
 	}
 	return -1;
 }
-int opsem(int sem_id, int val){
-	return oopsem(sem_id, val, 0);
-}
+
 int oopsem(int sem_id, int val, int flg){
 	struct sembuf buf;
 	buf.sem_op = val;
@@ -33,6 +31,10 @@ int oopsem(int sem_id, int val, int flg){
 		return -1;
 	}
 	return 0;
+}
+
+int opsem(int sem_id, int val){
+	return oopsem(sem_id, val, 0);
 }
 
 int set_sem(key_t sem_key, int sem_val, int sem_flg){
@@ -79,10 +81,4 @@ int set_msq(key_t msq_key, int msq_flg){
 	}
 	return msg_id;
 }
-void ipc_init(){
-	int ipc_flg = IPC_CREAT | 0644;
-	s_account_id = set_sem(s_account, 1, ipc_flg);
-	s_customer_id = set_sem(s_customer, 20, ipc_flg);
-	q_sofa_id = set_msq(q_sofa, ipc_flg);
-	q_wait_id = set_msq(q_wait, ipc_flg);
-}
+
