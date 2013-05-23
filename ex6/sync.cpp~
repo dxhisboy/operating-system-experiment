@@ -58,5 +58,5 @@ void oneway::quit(int direction){
 		cond->signal(direction);
 	l->release();
 }
-int main(int argc, char** argv){
+int main(){
 }

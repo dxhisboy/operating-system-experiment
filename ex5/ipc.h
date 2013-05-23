@@ -25,4 +25,10 @@ typedef struct msgbuf{
 	char mtext[1];
 }msg_buf;
 typedef struct msqid_ds msqid_ds;
+extern key_t s_account, s_customer;
+extern key_t q_sofa, q_wait;
+extern int s_account_id, s_customer_id;
+extern int q_sofa_id, q_wait_id;
+extern int msg_size;
+
 #endif

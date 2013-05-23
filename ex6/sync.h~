@@ -29,7 +29,7 @@ private:
 };
 class oneway{
 public:
-	oneway(int max);
+	oneway(int argc, char** argv);
 	~oneway();
 	void arrive(int direction);
 	void cross(int direction);
