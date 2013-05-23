@@ -16,7 +16,7 @@ int get_ipc_id(char *prof, key_t key);
 char *set_shm(key_t shm_key, int shm_num, int shm_flag);
 int set_sem(key_t sem_key, int sem_val, int sem_flag);
 int set_msq(key_t msq_key, int msq_flag);
-int oopsem(int sem_id, int val);
+int oopsem(int sem_id, int val, int flg);
 int opsem(int sem_id, int val);
 void ipc_init();
 typedef union semuns{

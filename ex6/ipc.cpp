@@ -54,6 +54,7 @@ int set_sem(key_t sem_key, int sem_val, int sem_flg){
 	}
 	sem_uns res;
 	printf("%d %d %d\n", sem_key, sem_id, semctl(sem_id, 0, GETVAL, res));
+	perror("a");
 	return sem_id;
 }
 char *set_shm(key_t shm_key, int shm_num, int shm_flg){
