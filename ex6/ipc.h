@@ -20,9 +20,9 @@ void ipc_init();
 typedef union semuns{
 	int val;
 }sem_uns;
-typedef struct msgbuf{
+struct msg_buf{
 	long mtype;
 	char mtext[1];
-}msg_buf;
+};
 typedef struct msqid_ds msqid_ds;
 #endif
