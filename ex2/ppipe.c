@@ -30,7 +30,7 @@ int main(){
 			close(p01[0]);
 			close(p02[0]);
 			close(p10[1]);
-			close(p20[1]);cd 
+			close(p20[1]); 
 			int x, y, fx, fy;
 			scanf("%d%d", &x, &y);
 			write(p01[1], &x, sizeof(int));
