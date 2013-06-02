@@ -12,7 +12,7 @@ void barb(int which){
 		opsem(s_account_id, -1);
 		printf("Barber %d recording\n", which);
 		opsem(s_account_id, 1);
-		printf("Barber %d recorded\n" which);
+		printf("Barber %d recorded\n", which);
 	}
 }
 int main(){
